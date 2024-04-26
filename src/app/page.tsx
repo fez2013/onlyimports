@@ -1,26 +1,27 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 
-export default function InventoryPage() {
+export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.description}>
         <p>
-          Welcome to our car inventory! Explore our latest JDM imports and exotic supercars.
+          Get started by editing&nbsp;
+          <code className={styles.code}>src/app/page.tsx</code>
         </p>
         <div>
           <a
-            href="https://your-importer-website.com"
+            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span className={styles.companyName}>Your Importer Name</span>
+            By{" "}
             <Image
-              src="/company-logo.svg"
-              alt="Company Logo"
-              className={styles.companyLogo}
-              width={120}
-              height={30}
+              src="/vercel.svg"
+              alt="Vercel Logo"
+              className={styles.vercelLogo}
+              width={100}
+              height={24}
               priority
             />
           </a>
@@ -30,61 +31,63 @@ export default function InventoryPage() {
       <div className={styles.center}>
         <Image
           className={styles.logo}
-          src="/car-logo.svg"
-          alt="Car Logo"
+          src="/next.svg"
+          alt="Next.js Logo"
           width={180}
-          height={90}
+          height={37}
           priority
         />
       </div>
 
       <div className={styles.grid}>
         <a
-          href="/cars/jdm"
+          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           className={styles.card}
           target="_blank"
           rel="noopener noreferrer"
         >
           <h2>
-            JDM Imports <span>-&gt;</span>
+            Docs <span>-&gt;</span>
           </h2>
-          <p>Discover our collection of authentic JDM cars.</p>
+          <p>Find in-depth information about Next.js features and API.</p>
         </a>
 
         <a
-          href="/cars/supercars"
+          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           className={styles.card}
           target="_blank"
           rel="noopener noreferrer"
         >
           <h2>
-            Supercars <span>-&gt;</span>
+            Learn <span>-&gt;</span>
           </h2>
-          <p>Experience the thrill of our exotic supercars.</p>
+          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
         </a>
 
         <a
-          href="/cars/hypercars"
+          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           className={styles.card}
           target="_blank"
           rel="noopener noreferrer"
         >
           <h2>
-            Hypercars <span>-&gt;</span>
+            Templates <span>-&gt;</span>
           </h2>
-          <p>Explore our elite collection of hyper-performance machines.</p>
+          <p>Explore starter templates for Next.js.</p>
         </a>
 
         <a
-          href="/cars/classic"
+          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           className={styles.card}
           target="_blank"
           rel="noopener noreferrer"
         >
           <h2>
-            Classic Cars <span>-&gt;</span>
+            Deploy <span>-&gt;</span>
           </h2>
-          <p>Discover timeless elegance with our classic car selection.</p>
+          <p>
+            Instantly deploy your Next.js site to a shareable URL with Vercel.
+          </p>
         </a>
       </div>
     </main>
