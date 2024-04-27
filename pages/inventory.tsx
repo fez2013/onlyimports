@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import styles from '../styles/Home.module.css';
+import styles from '../../src/app/page.module.css';
 
 const cars = [
   { id: 1, name: 'Car 1', image: '/car1.jpg' },
