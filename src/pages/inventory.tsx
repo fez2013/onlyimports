@@ -1,36 +1,69 @@
-import Head from "next/head";
-import Image from "next/image";
-import styles from '../app/page.module.css';
+import React, { useEffect, useState } from 'react';
 
-const cars = [
-  { id: 1, name: '1999 Nissan Skyline GT-R VSpec', image: '/car1.jpg', price: '$245,000' },
-  { id: 2, name: 'Car 2', image: '/car2.jpg', price: '$200,000' },
-  { id: 3, name: 'Car 3', image: '/car3.jpg', price: '$180,000' },
-  { id: 4, name: 'Car 4', image: '/car4.jpg', price: '$150,000' },
-  // Add more cars as needed
-];
+interface Product {
+  Car_Name: string;
+  Year: number;
+  Mileage: number;
+  imageURL: string; 
+}
 
-export default function InventoryPage() {
+export default function getInventory() {
+  const [products, setProducts] = useState<Product[]>([]);
+
+  async function addProduct() {
+    try {
+      const postData = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/inventory`, postData);
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+      const response = await res.json();
+      setProducts(response.products); 
+      console.log(response.products); 
+    } catch (error) {
+      console.error('Failed to fetch:', error);
+    }
+  }
+
+  useEffect(() => {
+    console.log("useEffect triggered");
+    addProduct();
+  }, []);
+
   return (
     <div>
-      <main>
-        <div className={styles.container}>
-          <h1 className={styles.title}>Inventory Page</h1>
-        </div>
-        <div className={styles.grid}>
-          {cars.map((car) => (
-            <div key={car.id} className={styles.card}>
-              <div className={styles.cardImage}>
-                <Image src={car.image} alt={car.name} width={300} height={200} />
-              </div>
-              <div className={styles.cardContent}>
-                <h2 className={styles.cardTitle}>{car.name}</h2>
-                <p className={styles.cardPrice}>Offered at: {car.price}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </main>
+      <style>
+        {`
+          .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+          }
+          .inventory-item {
+            text-align: center;
+          }
+          .inventory-item img {
+            width: 100%; // Adjust as necessary
+            height: auto;
+            max-height: 200px; // Optional: limit the image height
+          }
+        `}
+      </style>
+      <h1>Inventory</h1>
+      <ul className="inventory-grid">
+        {products.map((product, index) => (
+          <li key={index} className="inventory-item">
+            <img src={product.imageURL} alt={`Image of ${product.Car_Name}`} />
+            <div>{product.Year} - {product.Car_Name} - {product.Mileage.toLocaleString()}</div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
