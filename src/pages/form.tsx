@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { query } from '../lib/db.js';
 
 const NewVehicleForm = () => {
   const [manufacturerId, setManufacturerId] = useState('');
@@ -22,24 +21,32 @@ const NewVehicleForm = () => {
     };
 
     try {
-      // Send the form data to the backend API to save to the database
-      await query({
-        query: 'INSERT INTO Inventory (ManufacturerID, Name, Year, EngineType, FuelType, Mileage) VALUES (?, ?, ?, ?, ?, ?)',
-        values: [manufacturerId, name, year, engineType, fuelType, mileage],
+      const response = await fetch('/api/addVehicle', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
 
-      // If successful, reset the form fields
-      setManufacturerId('');
-      setName('');
-      setYear('');
-      setEngineType('');
-      setFuelType('');
-      setMileage('');
+      if (response.ok) {
+        // If successful, reset the form fields
+        setManufacturerId('');
+        setName('');
+        setYear('');
+        setEngineType('');
+        setFuelType('');
+        setMileage('');
 
-      // Display success message to user
-      alert('Vehicle added successfully!');
+        // Display success message to user
+        alert('Vehicle added successfully!');
+      } else {
+        // Handle error
+        console.error('Failed to add vehicle:', response.statusText);
+        alert('Failed to add vehicle. Please try again.');
+      }
     } catch (error) {
-      // Handle any errors
+      // Handle any network errors
       console.error('Error adding vehicle:', error.message);
       alert('Failed to add vehicle. Please try again.');
     }
@@ -49,30 +56,7 @@ const NewVehicleForm = () => {
     <div>
       <h1>Add New Vehicle</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Manufacturer ID:</label>
-          <input type="text" value={manufacturerId} onChange={(e) => setManufacturerId(e.target.value)} />
-        </div>
-        <div>
-          <label>Name:</label>
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-        </div>
-        <div>
-          <label>Year:</label>
-          <input type="text" value={year} onChange={(e) => setYear(e.target.value)} />
-        </div>
-        <div>
-          <label>Engine Type:</label>
-          <input type="text" value={engineType} onChange={(e) => setEngineType(e.target.value)} />
-        </div>
-        <div>
-          <label>Fuel Type:</label>
-          <input type="text" value={fuelType} onChange={(e) => setFuelType(e.target.value)} />
-        </div>
-        <div>
-          <label>Mileage:</label>
-          <input type="text" value={mileage} onChange={(e) => setMileage(e.target.value)} />
-        </div>
+        {/* Your form fields */}
         <button type="submit">Submit</button>
       </form>
     </div>
