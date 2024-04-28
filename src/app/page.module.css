@@ -228,3 +228,75 @@
     transform: rotate(0deg);
   }
 }
+.container {
+  position: relative; /* Ensure the container is positioned relative */
+  text-align: center; /* Center text within container */
+  background-image: url('/background-image.jpg'); /* Reference the image from the public folder */
+  background-size: cover; /* Cover the entire container area */
+  color: white; /* Set text color to white for better contrast */
+  padding: 200px 0; /* Add padding to the container */
+}
+
+.container::before {
+  content: ''; /* Add a pseudo-element */
+  position: absolute; /* Position the pseudo-element */
+  top: 0; /* Align to the top of the container */
+  left: 0; /* Align to the left of the container */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)); /* Add gradient overlay */
+  z-index: 1;
+}
+
+.grid {
+  width: 90%; /* 90% width of the screen */
+  max-width: 1600px; /* Max width of 1600px */
+  margin: 0 auto; /* Center the grid horizontally */
+}
+
+.card {
+  margin: 20px; /* Add margin around each card */
+  text-align: center; /* Center text within card */
+}
+
+.card h3 {
+  margin-top: 10px; /* Add spacing between image and title */
+}
+
+.title {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+  text-transform: uppercase;
+}
+
+.card {
+  margin: 20px;
+  text-align: center;
+  width: 300px;
+}
+
+.cardImage {
+  border-radius: 0 0 15px 15px;
+}
+
+.cardContent {
+  background-color: #000;
+  padding: 15px;
+  border-radius: 0 0 15px 15px;
+  width: 100%; /* Make card content span full width */
+  box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+.cardTitle {
+  color: white;
+  font-size: 24px;
+  margin: 10px 0;
+}
+
+.cardPrice {
+  color: #fff;
+  font-size: 20px;
+  margin: 10px 0;
+  text-align:center;
+}
