@@ -49,8 +49,9 @@ const NewVehicleForm = () => {
         alert('Failed to add vehicle. Please try again.');
       }
     } catch (error) {
-      // Handle any network errors
-      console.error('Error adding vehicle:', error.message);
+      // Assert that error is of type Error
+      const errorMessage = (error as Error).message;
+      console.error('Error adding vehicle:', errorMessage);
       alert('Failed to add vehicle.');
     }
   };
